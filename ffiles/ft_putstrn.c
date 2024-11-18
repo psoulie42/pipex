@@ -6,11 +6,11 @@
 /*   By: psoulie <psoulie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 15:49:49 by psoulie           #+#    #+#             */
-/*   Updated: 2024/10/18 12:03:22 by psoulie          ###   ########.fr       */
+/*   Updated: 2024/11/18 13:51:54 by psoulie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../ft_printf.h"
+#include "../pipex.h"
 
 int	ft_putstrn(char *str)
 {

@@ -6,11 +6,11 @@
 /*   By: psoulie <psoulie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/18 12:25:33 by psoulie           #+#    #+#             */
-/*   Updated: 2024/10/18 12:36:11 by psoulie          ###   ########.fr       */
+/*   Updated: 2024/11/18 13:51:52 by psoulie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../ft_printf.h"
+#include "../pipex.h"
 
 static int	count(long n)
 {
