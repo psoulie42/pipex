@@ -6,7 +6,7 @@
 /*   By: psoulie <psoulie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 10:22:09 by psoulie           #+#    #+#             */
-/*   Updated: 2024/11/19 11:56:56 by psoulie          ###   ########.fr       */
+/*   Updated: 2024/11/19 14:30:42 by psoulie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,20 +18,24 @@ char	*findpath(char *cmd, char **env)
 	char	*attempt;
 	int		i;
 
-	i  = 0;
-	while (!ft_strnstr(env[i++], "PATH", 4));
-	paths = ft_split(env[i], ':');
+	i  = -1;
+	while (!ft_strnstr(env[++i], "PATH", 4));
+	paths = ft_split(env[i] + 5, ':');
+	if (!paths)
+		exit(-1);
 	i = 0;
 	while (paths[i])
 	{
 		attempt = ft_strjoin(ft_strjoin(paths[i], "/"), cmd);
-		if (access(attempt, F_OK))
+		if (access(attempt, F_OK) == 0)
 			return (attempt);
 		free(attempt);
 		i++;
 	}
-	while (i >= 0)
-		free(paths[i--]);
+	i = -1;
+	while (paths[++i])
+		free(paths[i]);
+	free(paths);
 	return (NULL);
 }
 
@@ -42,13 +46,15 @@ void	execute(char *str, char **env)
 	int		i;
 
 	cmd = ft_split(str, ' ');
+	if (!cmd)
+		exit(-1);
 	path = findpath(cmd[0], env);
-	printf("%s\n", path);
-	i = 0;
+	i = -1;
 	if (!path)
 	{
-		while (cmd[i])
-			free(cmd[i++]);
+		while (cmd[++i])
+			free(cmd[i]);
+		free(cmd);
 		perror("command not found");
 		exit(-1);
 	}
@@ -65,10 +71,12 @@ void	child(char *cmd1, char *infile, int *end, char **env)
 
 	close(end[0]);
 	fdin = open(infile, O_RDONLY);
+	if (fdin == -1)
+		exit(EXIT_FAILURE);
 	dup2(fdin, STDIN_FILENO);
 	dup2(end[1], STDOUT_FILENO);
-	execute(cmd1, env);
 	close(fdin);
+	execute(cmd1, env);
 }
 
 void	parent(char *cmd2, char *outfile, int *end, char **env)
@@ -77,10 +85,12 @@ void	parent(char *cmd2, char *outfile, int *end, char **env)
 
 	close(end[1]);
 	fdout = open(outfile, O_WRONLY | O_CREAT | O_TRUNC, 0644);
+	if (fdout == -1)
+		exit(EXIT_FAILURE);
 	dup2(end[0], STDIN_FILENO);
 	dup2(fdout, STDOUT_FILENO);
-	execute(cmd2, env);
 	close(fdout);
+	execute(cmd2, env);
 }
 
 int	main(int ac, char **av, char **env)
