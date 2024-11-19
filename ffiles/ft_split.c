@@ -6,11 +6,11 @@
 /*   By: psoulie <psoulie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 13:35:54 by psoulie           #+#    #+#             */
-/*   Updated: 2024/11/18 13:51:51 by psoulie          ###   ########.fr       */
+/*   Updated: 2024/11/19 11:37:02 by psoulie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../pipex.h"
 
 static int	count(char *str, char c)
 {

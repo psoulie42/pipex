@@ -6,11 +6,11 @@
 #    By: psoulie <psoulie@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/14 12:48:10 by psoulie           #+#    #+#              #
-#    Updated: 2024/11/18 13:51:49 by psoulie          ###   ########.fr        #
+#    Updated: 2024/11/19 11:42:11 by psoulie          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-FILES =		
+FILES =		pipex		\
 
 FFILES = 	printf		\
 			countargs	\
@@ -20,22 +20,26 @@ FFILES = 	printf		\
 			putunbrn	\
 			putnbrhexn	\
 			putptrn		\
+			split		\
+			strjoin		\
+			strnstr		\
 
-SRCS = $(addprefix ./ft_, $(addsuffix .c, $(FILES)))
+SRCS = $(addsuffix .c, $(FILES))
 FSRCS_DIR = ./ffiles/
 FSRCS = $(addprefix $(FSRCS_DIR)ft_, $(addsuffix .c, $(FFILES)))
 
 OFILES = $(SRCS:.c=.o) $(FSRCS:.c=.o)
 
-NAME = libftprintf.a
+NAME = pipex
 
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror -fsanitize=address
+EXFILE = pipex
 
 all: $(NAME)
 
-$(NAME): $(OFILES) $(FOFILES)
-		$(CC) $(CFLAGS) $(NAME)
+$(NAME): $(OFILES)
+		$(CC) $(CFLAGS) $(OFILES) -o $(NAME)
 
 clean:
 		rm -f $(OFILES)
