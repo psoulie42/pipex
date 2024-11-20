@@ -6,11 +6,13 @@
 #    By: psoulie <psoulie@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/14 12:48:10 by psoulie           #+#    #+#              #
-#    Updated: 2024/11/20 11:21:31 by psoulie          ###   ########.fr        #
+#    Updated: 2024/11/20 13:24:34 by psoulie          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 FILES =		pipex		\
+
+BFILES =	pipex_bonus	\
 
 FFILES = 	printf		\
 			countargs	\
@@ -25,12 +27,15 @@ FFILES = 	printf		\
 			strnstr		\
 
 SRCS = $(addsuffix .c, $(FILES))
+BSRCS = $(addsuffix .c, $(BFILES))
 FSRCS_DIR = ./ffiles/
 FSRCS = $(addprefix $(FSRCS_DIR)ft_, $(addsuffix .c, $(FFILES)))
 
 OFILES = $(SRCS:.c=.o) $(FSRCS:.c=.o)
+BOFILES = $(BSRCS:.c=.o) $(FSRCS:.c=.o)
 
 NAME = pipex
+BONUS = pipex
 
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror -fsanitize=address
@@ -41,8 +46,13 @@ all: $(NAME)
 $(NAME): $(OFILES)
 		$(CC) $(CFLAGS) $(OFILES) -o $(NAME)
 
+bonus: $(BONUS)
+
+$(BONUS): $(BOFILES)
+		$(CC) $(CFLAGS) $(BOFILES) -o $(BONUS)
+
 clean:
-		rm -f $(OFILES)
+		rm -f $(OFILES) $(BOFILES)
 
 fclean: clean
 		rm -f $(NAME)
