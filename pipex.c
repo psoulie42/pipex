@@ -6,7 +6,7 @@
 /*   By: psoulie <psoulie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 10:22:09 by psoulie           #+#    #+#             */
-/*   Updated: 2024/11/19 14:30:42 by psoulie          ###   ########.fr       */
+/*   Updated: 2024/11/20 11:45:47 by psoulie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,9 @@ char	*findpath(char *cmd, char **env)
 	char	*attempt;
 	int		i;
 
-	i  = -1;
-	while (!ft_strnstr(env[++i], "PATH", 4));
+	i = -1;
+	while (ft_strnstr(env[++i], "PATH", 4)
+		== 0);
 	paths = ft_split(env[i] + 5, ':');
 	if (!paths)
 		exit(-1);
@@ -55,20 +56,21 @@ void	execute(char *str, char **env)
 		while (cmd[++i])
 			free(cmd[i]);
 		free(cmd);
-		perror("command not found");
-		exit(-1);
+		return ;
 	}
 	if (execve(path, cmd, env) == -1)
 	{
 		perror("execute");
-		exit(-1);
+		exit(EXIT_FAILURE);
 	}
 }
 
 void	child(char *cmd1, char *infile, int *end, char **env)
 {
 	int	fdin;
+	int	stdout;
 
+	stdout = dup(STDOUT_FILENO);
 	close(end[0]);
 	fdin = open(infile, O_RDONLY);
 	if (fdin == -1)
@@ -77,12 +79,17 @@ void	child(char *cmd1, char *infile, int *end, char **env)
 	dup2(end[1], STDOUT_FILENO);
 	close(fdin);
 	execute(cmd1, env);
+	dup2(stdout, STDOUT_FILENO);
+	ft_printf("command not found: %s\n", cmd1);
+	exit(EXIT_FAILURE);
 }
 
 void	parent(char *cmd2, char *outfile, int *end, char **env)
 {
 	int	fdout;
+	int	stdout;
 
+	stdout = dup(STDOUT_FILENO);
 	close(end[1]);
 	fdout = open(outfile, O_WRONLY | O_CREAT | O_TRUNC, 0644);
 	if (fdout == -1)
@@ -91,6 +98,9 @@ void	parent(char *cmd2, char *outfile, int *end, char **env)
 	dup2(fdout, STDOUT_FILENO);
 	close(fdout);
 	execute(cmd2, env);
+	dup2(stdout, STDOUT_FILENO);
+	ft_printf("command not found: %s\n", cmd2);
+	exit(EXIT_FAILURE);
 }
 
 int	main(int ac, char **av, char **env)
@@ -99,7 +109,7 @@ int	main(int ac, char **av, char **env)
 	pid_t	pid;
 
 	if (ac != 5)
-		return (ft_printf("Correct format: ./pipex infile \"cmd1\" \"cmd2\" outfile\n"));
+		return (ft_printf("Format: ./pipex infile \"cmd1\" \"cmd2\" outfile\n"));
 	if (pipe(end) == -1)
 		exit(-1);
 	pid = fork();

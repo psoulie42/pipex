@@ -6,7 +6,7 @@
 /*   By: psoulie <psoulie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 12:43:17 by psoulie           #+#    #+#             */
-/*   Updated: 2024/11/19 11:36:53 by psoulie          ###   ########.fr       */
+/*   Updated: 2024/11/20 11:45:45 by psoulie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # include <sys/types.h>
 # include <fcntl.h>
 # include <stdarg.h>
+# include <errno.h>
 
 int		ft_printf(const char *str, ...);
 int		ft_countargs(const char *str, char c);
