@@ -6,7 +6,7 @@
 /*   By: psoulie <psoulie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 12:43:17 by psoulie           #+#    #+#             */
-/*   Updated: 2024/11/25 11:23:08 by psoulie          ###   ########.fr       */
+/*   Updated: 2024/11/25 15:06:38 by psoulie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ char	**ft_split(const char *str, char c);
 char	*ft_strnstr(const char *hst, const char *ndl, size_t n);
 char	*ft_strjoin(char const *s1, char const *s2);
 char	*get_next_line(int fd);
-void	here_doc(char *limit);
+void	here_doc(char *limit, int ac);
 void	exec_heredoc(char *limit, int *end);
 
 #endif

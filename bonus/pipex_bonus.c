@@ -6,7 +6,7 @@
 /*   By: psoulie <psoulie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 10:22:09 by psoulie           #+#    #+#             */
-/*   Updated: 2024/11/25 13:09:41 by psoulie          ###   ########.fr       */
+/*   Updated: 2024/11/25 15:08:47 by psoulie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,23 +95,21 @@ int	main(int ac, char **av, char **env)
 
 	if (ac < 5)
 		return (ft_printf("Format: ./pipex infile \"cmd1\" \"cmd2\" [..] \"cmdn\" outfile\n"));
-	i = 2;
 	if (ft_strncmp(av[1], "here_doc", 8) == 0)
 	{
-		if (ac < 6)
-			return (ft_printf("Format: ./pipex here_doc LIMITER \"cmd\" \"cmd1\" outfile\n"));
+		i = 3;
 		fdout = open(av[ac - 1], O_WRONLY | O_CREAT | O_TRUNC, 0644);
-		here_doc(av[2]);
+		here_doc(av[2], ac);
 	}
 	else
 	{
+		i = 2;
 		fdin = open(av[1], O_RDONLY);
 		fdout = open(av[ac - 1], O_WRONLY | O_CREAT | O_TRUNC, 0644);
 		dup2(fdin, STDIN_FILENO);
 	}
 	while (i < ac - 2)
 		child(av[i++], env);
-	printf("%d", i);
 	dup2(fdout, STDOUT_FILENO);
 	execute(av[ac - 2], env);
 	return (0);

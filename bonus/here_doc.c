@@ -6,7 +6,7 @@
 /*   By: psoulie <psoulie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 10:43:13 by psoulie           #+#    #+#             */
-/*   Updated: 2024/11/25 13:07:52 by psoulie          ###   ########.fr       */
+/*   Updated: 2024/11/25 15:06:29 by psoulie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,12 +30,16 @@ void	exec_heredoc(char *limiter, int *end)
 	}
 }
 
-
-void	here_doc(char *limiter)
+void	here_doc(char *limiter, int ac)
 {
 	int		end[2];
 	pid_t	pid;
 
+	if (ac < 6)
+	{
+		ft_printf("Format: ./pipex here_doc LIMITER \"cmd\" \"cmd1\" outfile\n");
+		exit(EXIT_FAILURE);
+	}
 	if (pipe(end) == -1)
 		exit(EXIT_FAILURE);
 	pid = fork();

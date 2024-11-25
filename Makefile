@@ -6,7 +6,7 @@
 #    By: psoulie <psoulie@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/14 12:48:10 by psoulie           #+#    #+#              #
-#    Updated: 2024/11/25 11:36:27 by psoulie          ###   ########.fr        #
+#    Updated: 2024/11/25 14:13:58 by psoulie          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -44,7 +44,7 @@ BOFILES = $(BSRCS:.c=.o) $(FSRCS:.c=.o)
 NAME = pipex
 
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror -fsanitize=address
+CFLAGS = -Wall -Wextra -Werror -fsanitize=address -g3
 EXFILE = pipex
 
 all: $(NAME)
