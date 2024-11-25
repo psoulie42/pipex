@@ -6,13 +6,14 @@
 #    By: psoulie <psoulie@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/14 12:48:10 by psoulie           #+#    #+#              #
-#    Updated: 2024/11/21 11:43:15 by psoulie          ###   ########.fr        #
+#    Updated: 2024/11/25 11:36:27 by psoulie          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 FILES =		pipex		\
 
 BFILES =	pipex_bonus	\
+			here_doc	\
 
 FFILES = 	printf		\
 			countargs	\
@@ -25,10 +26,16 @@ FFILES = 	printf		\
 			split		\
 			strjoin		\
 			strnstr		\
+			strlen		\
+			strncmp		\
+			get_next_line/get_next_line\
+			get_next_line/get_next_line_utils\
 
-SRCS = $(addsuffix .c, $(FILES))
-BSRCS = $(addsuffix .c, $(BFILES))
+SRCS_DIR = ./
 FSRCS_DIR = ./ffiles/
+BSRCS_DIR = ./bonus/
+SRCS = $(addprefix $(SRCS_DIR), $(addsuffix .c, $(FILES)))
+BSRCS = $(addprefix $(BSRCS_DIR), $(addsuffix .c, $(BFILES)))
 FSRCS = $(addprefix $(FSRCS_DIR)ft_, $(addsuffix .c, $(FFILES)))
 
 OFILES = $(SRCS:.c=.o) $(FSRCS:.c=.o)
@@ -48,7 +55,6 @@ bonus: $(BOFILES)
 $(NAME): $(OFILES)
 		$(CC) $(CFLAGS) $(OFILES) -o $(NAME)
 
-
 clean:
 		rm -f $(OFILES) $(BOFILES)
 
@@ -56,5 +62,7 @@ fclean: clean
 		rm -f $(NAME)
 
 re: fclean all
+
+re_bonus: fclean bonus
 
 .PHONY: all clean fclean re

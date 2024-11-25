@@ -1,3 +1,9 @@
-helloooo
-heeey
-heeeeeelllpppp
+total 176
+-rw-r--r--   1 psoulie  2024_lausanne   1888 Nov 25 11:36 Makefile
+drwxr-xr-x   6 psoulie  2024_lausanne    204 Nov 25 13:09 bonus
+drwxr-xr-x  29 psoulie  2024_lausanne    986 Nov 25 13:10 ffiles
+-rw-r--r--   1 psoulie  2024_lausanne      0 Nov 25 13:12 out
+-rwxr-xr-x   1 psoulie  2024_lausanne  71136 Nov 25 13:10 pipex
+-rw-r--r--   1 psoulie  2024_lausanne   2797 Nov 20 13:20 pipex.c
+-rw-r--r--   1 psoulie  2024_lausanne   1761 Nov 25 11:23 pipex.h
+-rw-r--r--   1 psoulie  2024_lausanne     43 Nov 19 14:58 test
