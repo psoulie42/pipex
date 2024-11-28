@@ -6,11 +6,18 @@
 /*   By: psoulie <psoulie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 10:22:09 by psoulie           #+#    #+#             */
-/*   Updated: 2024/11/25 15:08:47 by psoulie          ###   ########.fr       */
+/*   Updated: 2024/11/28 12:15:23 by psoulie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../pipex.h"
+
+void	cnf(char *cmd)
+{
+	dup2(STDERR_FILENO, STDOUT_FILENO);
+	ft_printf("command not found: %s\n", cmd);
+	exit(EXIT_FAILURE);
+}
 
 char	*findpath(char *cmd, char **env)
 {
@@ -78,6 +85,7 @@ void	child(char *av, char **env)
 		close(end[0]);
 		dup2(end[1], STDOUT_FILENO);
 		execute(av, env);
+		cnf(av);
 	}
 	else
 	{
@@ -112,5 +120,6 @@ int	main(int ac, char **av, char **env)
 		child(av[i++], env);
 	dup2(fdout, STDOUT_FILENO);
 	execute(av[ac - 2], env);
+	cnf(av[ac - 2]);
 	return (0);
 }
