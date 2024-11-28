@@ -6,7 +6,7 @@
 /*   By: psoulie <psoulie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 12:43:17 by psoulie           #+#    #+#             */
-/*   Updated: 2024/11/25 15:06:38 by psoulie          ###   ########.fr       */
+/*   Updated: 2024/11/28 13:55:31 by psoulie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,8 @@ int		ft_putnbrn(int nb);
 int		ft_putunbrn(unsigned int n);
 int		ft_putnbrhexn(unsigned long n, char a);
 int		ft_putptrn(void *ptr);
-int		ft_strncmp(const char *s1, const char *s2, size_t n);
+int		ft_strcmp(const char *s1, const char *s2);
+int		openfile(char *file, int mode);
 size_t	ft_strlen(const char *str);
 char	**ft_split(const char *str, char c);
 char	*ft_strnstr(const char *hst, const char *ndl, size_t n);

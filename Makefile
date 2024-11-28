@@ -6,7 +6,7 @@
 #    By: psoulie <psoulie@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/14 12:48:10 by psoulie           #+#    #+#              #
-#    Updated: 2024/11/25 14:13:58 by psoulie          ###   ########.fr        #
+#    Updated: 2024/11/28 13:55:55 by psoulie          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,7 +27,7 @@ FFILES = 	printf		\
 			strjoin		\
 			strnstr		\
 			strlen		\
-			strncmp		\
+			strcmp		\
 			get_next_line/get_next_line\
 			get_next_line/get_next_line_utils\
 

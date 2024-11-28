@@ -6,7 +6,7 @@
 /*   By: psoulie <psoulie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 10:22:09 by psoulie           #+#    #+#             */
-/*   Updated: 2024/11/20 13:20:53 by psoulie          ###   ########.fr       */
+/*   Updated: 2024/11/28 14:34:13 by psoulie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,10 @@ void	child(char *cmd1, char *infile, int *end, char **env)
 	close(end[0]);
 	fdin = open(infile, O_RDONLY);
 	if (fdin == -1)
+	{
+		perror(infile);
 		exit(EXIT_FAILURE);
+	}
 	dup2(fdin, STDIN_FILENO);
 	dup2(end[1], STDOUT_FILENO);
 	close(fdin);
