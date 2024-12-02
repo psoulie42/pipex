@@ -6,7 +6,7 @@
 /*   By: psoulie <psoulie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/18 12:25:33 by psoulie           #+#    #+#             */
-/*   Updated: 2024/11/18 13:51:52 by psoulie          ###   ########.fr       */
+/*   Updated: 2024/11/28 16:57:43 by psoulie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,12 +46,6 @@ int	ft_putunbrn(unsigned int n)
 	minus = 0;
 	if (n == 0)
 		return (specialcase(n));
-	if (n < 0)
-	{
-		write(1, "-", 1);
-		n *= -1;
-		minus = 1;
-	}
 	if (n > 9)
 	{
 		ft_putunbrn(n / 10);

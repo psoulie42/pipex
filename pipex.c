@@ -6,7 +6,7 @@
 /*   By: psoulie <psoulie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 10:22:09 by psoulie           #+#    #+#             */
-/*   Updated: 2024/11/28 14:34:13 by psoulie          ###   ########.fr       */
+/*   Updated: 2024/12/02 19:57:48 by psoulie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,28 +16,29 @@ char	*findpath(char *cmd, char **env)
 {
 	char	**paths;
 	char	*attempt;
+	char	*attemptdir;
 	int		i;
 
-	i = -1;
-	while (ft_strnstr(env[++i], "PATH", 4)
-		== 0);
+	i = 0;
+	while (ft_strnstr(env[i], "PATH", 4) == 0)
+		i++;
 	paths = ft_split(env[i] + 5, ':');
 	if (!paths)
 		exit(-1);
-	i = 0;
-	while (paths[i])
+	i = -1;
+	while (paths[++i])
 	{
-		attempt = ft_strjoin(ft_strjoin(paths[i], "/"), cmd);
+		attemptdir = ft_strjoin(paths[i], "/");
+		attempt = ft_strjoin(attemptdir, cmd);
+		free(attemptdir);
 		if (access(attempt, F_OK) == 0)
 			return (attempt);
 		free(attempt);
-		i++;
 	}
 	i = -1;
 	while (paths[++i])
 		free(paths[i]);
-	free(paths);
-	return (NULL);
+	return (free(paths), NULL);
 }
 
 void	execute(char *str, char **env)
@@ -47,8 +48,12 @@ void	execute(char *str, char **env)
 	int		i;
 
 	cmd = ft_split(str, ' ');
-	if (!cmd)
+	if (!cmd || !*cmd)
+	{
+		dup2(STDERR_FILENO, STDOUT_FILENO);
+		ft_printf("missing command\n");
 		exit(-1);
+	}
 	path = findpath(cmd[0], env);
 	i = -1;
 	if (!path)
@@ -108,7 +113,7 @@ int	main(int ac, char **av, char **env)
 	pid_t	pid;
 
 	if (ac != 5)
-		return (ft_printf("Format: ./pipex infile \"cmd1\" \"cmd2\" outfile\n"));
+		return (ft_printf("Format: ./pipex infile \"cmd1\" \"cmd2\" outfile\n"), 1);
 	if (pipe(end) == -1)
 		exit(-1);
 	pid = fork();
