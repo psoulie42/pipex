@@ -6,7 +6,7 @@
 /*   By: psoulie <psoulie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 13:35:54 by psoulie           #+#    #+#             */
-/*   Updated: 2024/12/02 19:57:36 by psoulie          ###   ########.fr       */
+/*   Updated: 2024/12/03 09:07:13 by psoulie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,6 @@ static int	count(char *str, char c)
 			{
 				quote(str[i], &in_quote);
 				i++;
-				if (in_quote && quote(str[i++], &in_quote))
-					break ;
 			}
 		}
 		while (str[i] == c && !in_quote)
@@ -67,19 +65,25 @@ static char	*word(char *str, int start, char c)
 	in_quote = 0;
 	i = 0;
 	len = 0;
-	while (str[start + len] && (str[start + len] != c || in_quote))
+	while (str[start + len + i] && (str[start + len + i] != c || in_quote))
 	{
-		quote(str[start + len], &in_quote);
+		if (quote(str[start + len + i], &in_quote))
+		{
+			len--;
+			i++;
+		}
 		len ++;
 	}
 	word = malloc((len + 1) * sizeof(char));
 	if (!word)
 		return (NULL);
+	i = 0;
 	while (i < len)
 	{
+		if (quote(str[start + i], &in_quote))
+			start++;
 		word[i] = str[start + i];
-		if (quote(word[i++], &in_quote) && !in_quote)
-			break ;
+		i++;
 	}
 	word[i] = 0;
 	return (word);
@@ -110,8 +114,6 @@ char	**ft_split(char *str, char c)
 			{
 				quote(str[i], &in_quote);
 				i++;
-				if (in_quote && quote(str[i++], &in_quote))
-					break ;
 			}
 		}
 		while (str[i] == c && !in_quote)
@@ -122,7 +124,7 @@ char	**ft_split(char *str, char c)
 
 /* int	main()
 {
-	char str[] = "genre 'laa hre'a";
+	char str[] = "genre'laa ca ' passe' yo'";
 	int i = 0;
 	char c = ' ';
 	char **spliff = ft_split(str, c);
