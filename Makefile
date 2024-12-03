@@ -6,30 +6,31 @@
 #    By: psoulie <psoulie@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/14 12:48:10 by psoulie           #+#    #+#              #
-#    Updated: 2024/11/28 17:20:08 by psoulie          ###   ########.fr        #
+#    Updated: 2024/12/03 11:07:07 by psoulie          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-FILES =		pipex		\
+FILES =		pipex			\
 
-BFILES =	pipex_bonus	\
-			here_doc	\
+BFILES =	pipex_bonus		\
+			here_doc		\
 
-FFILES = 	printf		\
-			countargs	\
-			putcharn	\
-			putstrn		\
-			putnbrn		\
-			putunbrn	\
-			putnbrhexn	\
-			putptrn		\
-			split		\
-			strjoin		\
-			strnstr		\
-			strlen		\
-			strcmp		\
-			get_next_line/get_next_line\
-			get_next_line/get_next_line_utils\
+FFILES = 	printf			\
+			countargs		\
+			putcharn		\
+			putstrn			\
+			putnbrn			\
+			putunbrn		\
+			putnbrhexn		\
+			putptrn			\
+			split			\
+			splitonsteroids	\
+			strjoin			\
+			strnstr			\
+			strlen			\
+			strcmp			\
+			get_next_line/get_next_line			\
+			get_next_line/get_next_line_utils	\
 
 SRCS_DIR = ./
 FSRCS_DIR = ./ffiles/

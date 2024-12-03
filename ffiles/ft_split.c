@@ -6,13 +6,13 @@
 /*   By: psoulie <psoulie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 13:35:54 by psoulie           #+#    #+#             */
-/*   Updated: 2024/12/03 09:07:13 by psoulie          ###   ########.fr       */
+/*   Updated: 2024/12/03 11:10:13 by psoulie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../pipex.h"
 
-static void	toggle_quote(int *in_quote)
+void	toggle_quote(int *in_quote)
 {
 	*in_quote = !(*in_quote);
 }
@@ -64,16 +64,7 @@ static char	*word(char *str, int start, char c)
 
 	in_quote = 0;
 	i = 0;
-	len = 0;
-	while (str[start + len + i] && (str[start + len + i] != c || in_quote))
-	{
-		if (quote(str[start + len + i], &in_quote))
-		{
-			len--;
-			i++;
-		}
-		len ++;
-	}
+	len = ft_splitonsteroids(str, start, c);
 	word = malloc((len + 1) * sizeof(char));
 	if (!word)
 		return (NULL);
@@ -107,14 +98,10 @@ char	**ft_split(char *str, char c)
 		if (str[i] != c)
 		{
 			quote(str[i], &in_quote);
-			spliff[nbstr] = word(str, i, c);
-			nbstr++;
+			spliff[nbstr++] = word(str, i, c);
 			i++;
 			while (str[i] && (str[i] != c || in_quote))
-			{
-				quote(str[i], &in_quote);
-				i++;
-			}
+				quote(str[i++], &in_quote);
 		}
 		while (str[i] == c && !in_quote)
 			i++;
