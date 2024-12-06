@@ -6,7 +6,7 @@
 /*   By: psoulie <psoulie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 12:43:17 by psoulie           #+#    #+#             */
-/*   Updated: 2024/12/03 11:10:23 by psoulie          ###   ########.fr       */
+/*   Updated: 2024/12/06 10:48:36 by psoulie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ int		ft_strcmp(const char *s1, const char *s2);
 int		openfile(char *file, int mode);
 int		ft_splitonsteroids(char *str, int start, char c);
 int		quote(char c, int *in_quote);
+int		checkquote(char *str);
 size_t	ft_strlen(const char *str);
 char	**ft_split(char *str, char c);
 char	*ft_strnstr(const char *hst, const char *ndl, size_t n);

@@ -6,7 +6,7 @@
 /*   By: psoulie <psoulie@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 13:35:54 by psoulie           #+#    #+#             */
-/*   Updated: 2024/12/04 09:10:33 by psoulie          ###   ########.fr       */
+/*   Updated: 2024/12/06 11:43:20 by psoulie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	toggle_quote(int *in_quote)
 {
-	*in_quote = !(*in_quote);
+	*in_quote = !*in_quote;
 }
 
 int	quote(char c, int *in_quote)
@@ -76,6 +76,8 @@ static char	*word(char *str, int start, char c)
 		word[i] = str[start + i];
 		i++;
 	}
+	if (quote(str[start + i], &in_quote) < 2 && in_quote)
+		return (dup2(2,1), ft_printf("trailing quote\n"), exit(1), NULL);
 	word[i] = 0;
 	return (word);
 }
